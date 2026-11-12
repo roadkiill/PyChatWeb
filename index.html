@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PyChat — Web</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body><div class="app" id="app">
+<div class="titlebar"><span>🖉</span><span>PyChat</span><span class="push"></span><span class="status" id="connection">Starting…</span></div>
+<div class="brand">PyChat</div>
+<nav class="tabs" id="tabs"><button class="tab active" data-page="rooms">Rooms</button><button class="tab" data-page="friends">Friends</button><button class="tab" data-page="news">News</button><button class="tab" data-page="settings">Settings</button></nav>
+<section class="panel" id="page-rooms">
+ <div class="field"><label>Your name</label><input id="name" maxlength="24" value="Guest"></div>
+ <div class="row" style="margin:10px 0 14px"><label><input type="radio" name="mode" value="host"> Host a room</label><label><input type="radio" name="mode" value="join" checked> Join a room</label></div>
+ <div class="field"><label>Room name</label><input id="roomName" maxlength="20" placeholder="Optional room name"></div>
+ <div class="field"><label>Room code</label><input id="code" maxlength="6" placeholder="6-character code"></div><div id="visibilityRow" class="row" style="margin:0 0 12px"><label><input type="checkbox" id="publicRoom" checked> List this room publicly</label><span class="status">Turn off to make it private (code required).</span></div>
+ <fieldset><legend>Public rooms</legend><div class="row">Anyone can browse and join these rooms.<span class="push"></span><button id="refresh">Refresh</button></div><div class="tablewrap"><table class="table"><thead><tr><th>Room</th><th>Host</th><th>People</th></tr></thead><tbody id="roomRows"></tbody></table></div><div class="row" style="justify-content:flex-end;margin-top:7px"><button id="joinPublic">Join selected public room</button></div></fieldset>
+ <div class="row"><span class="status" id="roomStatus">Choose host or join to continue.</span><span class="push"></span><button id="connect">Connect</button></div>
+</section>
+<section class="panel hidden" id="page-friends"><h3>Friends</h3><div class="notice">Friends, friend requests, room invites, and presence sharing require a reserved account. This browser edition is guest-only.</div><button class="install">Install PyChat for account features</button></section>
+<section class="panel hidden" id="page-news"><h3 style="margin-top:0">News</h3><div id="newsList" class="status">Loading news…</div></section>
+<section class="panel hidden" id="page-settings"><h3 style="margin-top:0">Settings</h3><fieldset><legend>Account</legend><p>This web edition only supports guest access. To sign in with Google, reserve a username, manage friends, and use account features, install the desktop app.</p><button class="install">Install PyChat</button></fieldset><fieldset><legend>Appearance</legend><label><input type="checkbox" id="dark"> Dark theme</label></fieldset><fieldset><legend>Notifications</legend><label><input type="checkbox" id="notifications"> Browser notifications</label><p class="status">Notifications are shown only after you grant browser permission.</p></fieldset><fieldset><legend>Guest</legend><button id="copyUid">Copy guest ID</button> <span class="status" id="uidStatus"></span></fieldset></section>
+<section class="panel hidden" id="page-chat"><div class="chat">
+ <div class="chathead"><b id="chatRoomName">Room</b><span>|</span><b>Code: <span id="chatCode"></span></b><span class="push"></span><button id="invite">Invite friends</button><button id="copyCode">Copy code</button></div>
+ <div class="chatmain"><div class="messages" id="messages" aria-live="polite"></div><aside class="side"><div>Members</div><div class="members" id="members"></div><fieldset><legend>Voice chat</legend><div id="voiceStatus" class="status">Not in voice</div><button id="joinVoice" style="width:100%;margin-top:6px">Join voice</button><button id="mute" disabled style="width:100%;margin-top:5px">Mute</button><button id="leaveVoice" disabled style="width:100%;margin-top:5px">Leave call</button><button id="voiceSettings" style="width:100%;margin-top:5px">Voice settings</button></fieldset><button id="roomSettings">Room settings</button><button id="kick">Kick selected</button><button id="leave">Leave room</button><button id="closeRoom">Close room</button></aside></div>
+ <div class="tools"><button id="bold"><b>B</b></button><button id="italic"><i>I</i></button><label>Color <select id="color"><option value="">Default</option><option>red</option><option>orange</option><option>gold</option><option>green</option><option>teal</option><option>blue</option><option>purple</option><option>pink</option><option>brown</option><option>gray</option></select></label><label>Size <select id="size"><option value="">Normal</option><option value="# ">H1</option><option value="## ">H2</option><option value="### ">H3</option><option value="#### ">H4</option></select></label><label>Emoji <select id="emoji"><option value="">Emoji</option><option>:smile:</option><option>:heart:</option><option>:star:</option><option>:coffee:</option><option>:bolt:</option><option>:skull:</option><option>:lenny:</option><option>:tableflip:</option><option>:shrug:</option></select></label><span class="push"></span><span class="status">Type /help for commands</span></div>
+ <div class="composer"><input id="message" placeholder="Type a message…" maxlength="2000"><button id="send">Send</button></div>
+</div></section>
+<footer class="footer"><span>PyChat Web · Guest edition</span><span class="push"></span><button id="updates">Check for updates</button></footer>
+</div><div id="modalRoot"></div>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="app.js"></script></body></html>
