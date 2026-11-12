@@ -13,7 +13,7 @@ function page(p){document.querySelectorAll(".tab").forEach(x=>x.classList.toggle
 $("tabs").onclick=e=>{let b=e.target.closest("[data-page]");if(b)page(b.dataset.page)};
 function modal(title,body,buttons=[["Close",()=>closeModal()]]){$("modalRoot").innerHTML=`<div class="modalback"><div class="modal"><h3>${title}</h3><div id="modalBody">${body}</div><div class="actions" id="modalActions"></div></div></div>`;buttons.forEach(([label,fn])=>{let b=document.createElement("button");b.textContent=label;b.onclick=fn;$("modalActions").appendChild(b)})}
 function closeModal(){$("modalRoot").innerHTML=""}
-function install(){modal("PyChat desktop app","<p>Account features are available in the desktop app, not the guest-only web edition.</p><p>Install PyChat to sign in with Google, reserve your username, and use friends and account settings.</p>",[["Open download page",()=>{window.open("https://github.com/roadkiill/PyChat_App/releases/latest","_blank");closeModal()}],["Close",closeModal]])}
+function install(){modal("PyChat desktop app","<p>Account features are available in the desktop app, not the guest-only web edition.</p><p>Install PyChat to sign in with Google, reserve your username, and use friends and account settings.</p>",[["Open download page",()=>{window.open("https://roadkiill.github.io/PyChat/","_blank");closeModal()}],["Close",closeModal]])}
 document.querySelectorAll(".install").forEach(b=>b.onclick=install);
 function on(ref,cb){let r=db.ref(ref);r.on("value",s=>cb(s.val()));unsubs.push(()=>r.off())}
 function cleanupListeners(){unsubs.forEach(f=>f());unsubs=[]}
